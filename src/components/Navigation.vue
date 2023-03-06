@@ -1,38 +1,42 @@
 <template>
   <div>
-    <el-col :span="27">
-      <h5 background-color="#434a50">通用后台管理系统</h5>
-      <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">首页</span>
-        </el-menu-item>
-        <el-menu-item index="2">
-          <i class="el-icon-shopping-bag-2"></i>
-          <span slot="title">商品管理</span>
-        </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-user"></i>
-          <span slot="title">用户管理</span>
-        </el-menu-item>
-        <el-submenu index="4">
-          <template slot="title">
-            <i class="el-icon-setting"></i>
-            <span>其他</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="4-1">页面1</el-menu-item>
-            <el-menu-item index="4-2">页面2</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-      </el-menu>
-    </el-col>
+    <!-- <el-aside> -->
+    <el-row class="tac">
+      <el-col class="menu-wrapper">
+        <div class="title">通用后台管理系统</div>
+        <el-menu
+          default-active="1"
+          class="el-menu-vertical-demo"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
+          <el-menu-item index="1">
+            <i class="el-icon-s-home"></i>
+            <span slot="title">首页</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <i class="el-icon-shopping-bag-2"></i>
+            <span slot="title">商品管理</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <i class="el-icon-user"></i>
+            <span slot="title">用户管理</span>
+          </el-menu-item>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-setting"></i>
+              <span>其他</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="4-1">页面1</el-menu-item>
+              <el-menu-item index="4-2">页面2</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu>
+      </el-col>
+    </el-row>
+    <!-- </el-aside> -->
   </div>
 </template>
 
@@ -90,4 +94,15 @@ export default {
 </script>
 
 <style>
+.menu-wrapper {
+  overflow: hidden;
+}
+.title {
+  background-color: #545c64;
+  color: #fff;
+  width: 179px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+}
 </style>
