@@ -10,5 +10,10 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style lang="less" >
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
 </style>
