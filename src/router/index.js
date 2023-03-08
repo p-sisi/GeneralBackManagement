@@ -13,6 +13,7 @@ export default new VueRouter({
         name: 'main',
         path: '/',
         component: Main,
+        redirect: '/home',
         children: [{
                 name: 'user', //用户管理
                 path: 'user',
