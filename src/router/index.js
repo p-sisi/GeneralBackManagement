@@ -1,64 +1,42 @@
-import VueRouter from 'vue-router';
-import User from '../pages/User';
-import Home from '../pages/Home';
-import Main from '../pages/Main';
-import Mall from '../pages/Mall';
-import Other1 from '../pages/Other1';
-import Other2 from '../pages/Other2';
-import Login from '../pages/Login'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import User from '../views/User.vue'
+import Main from '../views/Main.vue'
+import Mall from '../views/Mall.vue'
+import PageOne from '../views/PageOne.vue'
+import PageTwo from '../views/PageTwo.vue'
+import Login from '../views/Login.vue'
+Vue.use(VueRouter)
+    // 1. 创建路由组件
+    // 2. 将路由与组件进行映射
+    // 3. 创建router实例
 
+const routes = [
+    // 主路由
+    {
+        path: '/',
+        component: Main,
+        name: 'Main',
+        redirect: '/home', // 重定向
+        children: [
+            // 子路由
+            // { path: 'home', name: 'home', component: Home }, // 首页
+            // { path: 'user', name: 'user', component: User }, // 用户管理
+            // { path: 'mall', name: 'mall', component: Mall }, // 商品管理
+            // { path: 'page1', name: 'page1', component: PageOne }, // 页面1
+            // { path: 'page2', name: 'page2', component: PageTwo }, // 页面2
+        ]
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login
+    }
+]
 
-// 获取原型对象push函数
-const originalPush = VueRouter.prototype.push
-
-// 获取原型对象replace函数
-const originalReplace = VueRouter.prototype.replace
-
-// 修改原型对象中的push函数
-VueRouter.prototype.push = function push(location) {
-    return originalPush.call(this, location).catch(err => err)
-}
-
-// 修改原型对象中的replace函数
-VueRouter.prototype.replace = function replace(location) {
-    return originalReplace.call(this, location).catch(err => err)
-}
-
-
-export default new VueRouter({
-    routes: [{
-            name: 'main',
-            path: '/',
-            component: Main,
-            redirect: '/home',
-            children: [{
-                    name: 'user', //用户管理
-                    path: 'user',
-                    component: User
-                }, {
-                    name: 'home', //首页
-                    path: 'home',
-                    component: Home
-                }, {
-                    name: 'mall', //商品管理
-                    path: 'mall',
-                    component: Mall
-                }, {
-                    name: 'other1', //其他页面1
-                    path: 'other1',
-                    component: Other1,
-                }, {
-                    name: 'other2', //其他页面2
-                    path: 'other2',
-                    component: Other2
-                }
-
-            ]
-        },
-        {
-            name: 'login',
-            path: '/login',
-            component: Login
-        }
-    ]
+const router = new VueRouter({
+    routes // (缩写) 相当于 routes: routes
 })
+
+export default router

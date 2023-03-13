@@ -1,39 +1,41 @@
 <template>
-  <!-- 头部下面的tag标签 -->
-  <div class="tag">
+  <div class="tabs">
     <el-tag
       v-for="(item, index) in tags"
       :key="item.path"
-      effect="dark"
       :closable="item.name !== 'home'"
-      :effect="item.name === $route.name ? 'dark' : 'plain'"
+      :effect="$route.name === item.name ? 'dark' : 'plain'"
       @click="changeMenu(item)"
       @close="handleClose(item, index)"
+      size="small"
     >
       {{ item.label }}
     </el-tag>
   </div>
 </template>
-
 <script>
 import { mapState, mapMutations } from "vuex";
-
 export default {
-  name: "RouteTag",
+  name: "CommonTag",
+  data() {
+    return {};
+  },
   computed: {
     ...mapState({
       tags: (state) => state.tab.tabsList,
     }),
   },
   methods: {
-    ...mapMutations(["CLOSETAG"]),
+    ...mapMutations(["closeTag"]),
+    // 点击tag跳转的功能
     changeMenu(item) {
+      // console.log(item)
       this.$router.push({ name: item.name });
     },
-    // 点击tag删除功能
+    // 点击tag删除的功能
     handleClose(item, index) {
       // 调用store中的mutation
-      this.CLOSETAG(item);
+      this.closeTag(item);
       const length = this.tags.length;
       // 删除之后的跳转逻辑
       if (item.name !== this.$route.name) {
@@ -53,13 +55,11 @@ export default {
   },
 };
 </script>
-
 <style lang="less" scoped>
-.tag {
-  margin-left: 20px;
-  margin-top: 10px;
+.tabs {
+  padding: 20px;
   .el-tag {
-    margin-left: 10px;
+    margin-right: 15px;
     cursor: pointer;
   }
 }

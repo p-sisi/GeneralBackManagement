@@ -2,7 +2,6 @@
 import Mock from 'mockjs'
 
 // 图表数据
-//在这里定义获取具体数据的方法，在mock中就可以直接调用getStatisticalData方法
 let List = []
 export default {
     getStatisticalData: () => {
@@ -22,7 +21,7 @@ export default {
         return {
             code: 20000,
             data: {
-                // 饼图数据
+                // 饼图
                 videoData: [{
                         name: '小米',
                         value: 2999
@@ -48,7 +47,7 @@ export default {
                         value: 4500
                     }
                 ],
-                // 柱状图数据
+                // 柱状图
                 userData: [{
                         date: '周一',
                         new: 5,
@@ -85,45 +84,44 @@ export default {
                         active: 170
                     }
                 ],
-                // 折线图数据
+                // 折线图
                 orderData: {
                     date: ['20191001', '20191002', '20191003', '20191004', '20191005', '20191006', '20191007'],
                     data: List
                 },
-                //首页表格的数据
                 tableData: [{
                         name: 'oppo',
-                        dayBuy: 500,
+                        todayBuy: 500,
                         monthBuy: 3500,
                         totalBuy: 22000
                     },
                     {
                         name: 'vivo',
-                        dayBuy: 300,
+                        todayBuy: 300,
                         monthBuy: 2200,
                         totalBuy: 24000
                     },
                     {
                         name: '苹果',
-                        dayBuy: 800,
+                        todayBuy: 800,
                         monthBuy: 4500,
                         totalBuy: 65000
                     },
                     {
                         name: '小米',
-                        dayBuy: 1200,
+                        todayBuy: 1200,
                         monthBuy: 6500,
                         totalBuy: 45000
                     },
                     {
                         name: '三星',
-                        dayBuy: 300,
+                        todayBuy: 300,
                         monthBuy: 2000,
                         totalBuy: 34000
                     },
                     {
                         name: '魅族',
-                        dayBuy: 350,
+                        todayBuy: 350,
                         monthBuy: 3000,
                         totalBuy: 22000
                     }
