@@ -8,6 +8,7 @@
         <el-header>
           <Header></Header>
         </el-header>
+        <RouteTag></RouteTag>
         <el-main>
           <!-- 路由跳转展示界面 -->
           <router-view></router-view>
@@ -20,10 +21,11 @@
 <script>
 import Navigation from "@/components/Navigation";
 import Header from "../components/Header";
+import RouteTag from "../components/RouteTag";
 
 export default {
   name: "Main",
-  components: { Navigation, Header },
+  components: { Navigation, Header, RouteTag },
 };
 </script>
 

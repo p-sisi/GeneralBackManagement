@@ -15,5 +15,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 </style>

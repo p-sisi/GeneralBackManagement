@@ -3,7 +3,17 @@
     <div class="l-header">
       <el-button icon="el-icon-menu" size="small"></el-button>
       <!-- 面包屑 -->
-      <span>首页</span>
+      <div class="breadCrumb">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item
+            v-for="item in tags"
+            :key="item.name"
+            :to="{ path: item.path }"
+            @click="clickTag(item)"
+            >{{ item.label }}</el-breadcrumb-item
+          >
+        </el-breadcrumb>
+      </div>
     </div>
     <div class="r-header">
       <el-dropdown>
@@ -22,8 +32,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "Header",
+  computed: {
+    ...mapState({
+      tags: (state) => state.tab.tabsList,
+    }),
+  },
 };
 </script>
 
@@ -34,13 +51,28 @@ export default {
   background-color: #333333;
 
   .l-header {
+    display: flex;
+    align-items: center;
     position: absolute;
     color: aliceblue;
     top: 50%;
     margin-top: -15.5px;
     margin-left: 25px;
-    span {
-      margin-left: 23px;
+    .breadCrumb {
+      margin-left: 20px;
+    }
+    /deep/.el-breadcrumb__item {
+      .el-breadcrumb__inner {
+        font-weight: normal;
+        &.is-link {
+          color: #666;
+        }
+      }
+      &:last-child {
+        .el-breadcrumb__inner {
+          color: #fff;
+        }
+      }
     }
   }
   .r-header {

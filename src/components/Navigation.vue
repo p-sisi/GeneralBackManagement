@@ -11,26 +11,33 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <el-menu-item index="/home">
-            <i class="el-icon-s-home"></i>
-            <span slot="title"> 首页</span>
+          <!-- 没有子菜单的导航栏 -->
+          <el-menu-item
+            v-for="item in noChildren"
+            :key="item.name"
+            :index="item.name"
+            @click="clickMenu(item)"
+          >
+            <i :class="`el-icon-${item.icon}`"></i>
+            <span slot="title">{{ item.label }}</span>
           </el-menu-item>
-          <el-menu-item index="mall">
-            <i class="el-icon-shopping-bag-2"></i>
-            <span slot="title">商品管理</span>
-          </el-menu-item>
-          <el-menu-item index="user">
-            <i class="el-icon-user"></i>
-            <span slot="title">用户管理</span>
-          </el-menu-item>
-          <el-submenu index="4">
+          <!-- 有子菜单的导航栏 -->
+          <el-submenu
+            v-for="item in hasChildren"
+            :key="item.label"
+            :index="item.label"
+          >
             <template slot="title">
-              <i class="el-icon-setting"></i>
-              <span>其他</span>
+              <i :class="`el-icon-${item.icon}`"></i>
+              <span slot="title">{{ item.label }}</span>
             </template>
-            <el-menu-item-group>
-              <el-menu-item index="other1">页面1</el-menu-item>
-              <el-menu-item index="other2">页面2</el-menu-item>
+            <el-menu-item-group
+              v-for="subItem in item.children"
+              :key="subItem.path"
+            >
+              <el-menu-item :index="subItem.path" @click="clickMenu(subItem)">{{
+                subItem.label
+              }}</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -44,8 +51,74 @@ export default {
   name: "Navigation",
   data() {
     return {
-      activeRouter: "",
+      activeRouter: "/",
+      menuData: [
+        {
+          path: "/",
+          name: "home",
+          label: "首页",
+          icon: "s-home",
+          url: "Home/Home",
+        },
+        {
+          path: "/mall",
+          name: "mall",
+          label: "商品管理",
+          icon: "video-play",
+          url: "MallManage/MallManage",
+        },
+        {
+          path: "/user",
+          name: "user",
+          label: "用户管理",
+          icon: "user",
+          url: "UserManage/UserManage",
+        },
+        {
+          label: "其他",
+          icon: "location",
+          children: [
+            {
+              path: "/other1",
+              name: "other1",
+              label: "页面1",
+              icon: "setting",
+              url: "Other/Other1",
+            },
+            {
+              path: "/other2",
+              name: "other2",
+              label: "页面2",
+              icon: "setting",
+              url: "Other/Other2",
+            },
+          ],
+        },
+      ],
     };
+  },
+  computed: {
+    // 没有子菜单
+    noChildren() {
+      return this.menuData.filter((item) => !item.children);
+    },
+    // 有子菜单
+    hasChildren() {
+      return this.menuData.filter((item) => item.children);
+    },
+  },
+  methods: {
+    clickMenu(item) {
+      // 当页面的路由与跳转的路由不一致才允许跳转
+      if (
+        this.$route.path !== item.path &&
+        !(this.$route.path === "/home" && item.path === "/")
+      ) {
+        this.$router.push(item.path);
+      }
+      // 需要传入当前菜单的信息，作为参数
+      this.$store.commit("SelectMENU", item);
+    },
   },
   mounted() {
     //获取地址栏中的路由，设置element-ui中的导航栏选中状态
@@ -61,7 +134,7 @@ export default {
 .title {
   background-color: #545c64;
   color: #fff;
-  width: 180px;
+  width: 200px;
   height: 40px;
   text-align: center;
   line-height: 40px;
